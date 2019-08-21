@@ -25,9 +25,11 @@ function copy() {
   var title = document.getElementById("title").value;
   var level_select = document.getElementById("level");
   var level = level_select.options[level_select.selectedIndex].value; 
+  var snapshot_src = document.getElementById("snapshot").src;
   //赋值
   autoFillForm.title = title;
   autoFillForm.level = level;
+  autoFillForm.snapshot = snapshot.src;
   //存储到storage
   chrome.storage.sync.set({
     'key_autoFillForm': autoFillForm
@@ -50,6 +52,7 @@ function paste() {
     document.getElementById("title").value = autoFillForm.title;
     var level_select = document.getElementById("level");
     level_select.value = autoFillForm.level;
+    document.getElementById("snapshot").src = autoFillForm.snapshot;
   });
   console.log("------------end paste-------------------");
 }
