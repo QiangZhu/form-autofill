@@ -7,7 +7,7 @@ var autoFillForm = {
   //标题
   title: "",
   //违规等级
-  level: 1,
+  level: "1",
   //网页截图
   snapshot: "",
   //URL
@@ -23,8 +23,11 @@ function copy() {
   console.log("------------start copy-------------------");
   //通过DOM查找页面需要拷贝的值
   var title = document.getElementById("title").value;
+  var level_select = document.getElementById("level");
+  var level = level_select.options[level_select.selectedIndex].value; 
   //赋值
   autoFillForm.title = title;
+  autoFillForm.level = level;
   //存储到storage
   chrome.storage.sync.set({
     'key_autoFillForm': autoFillForm
@@ -45,6 +48,8 @@ function paste() {
     console.log('get autoFillForm from storage :' + autoFillForm);
     //通过DOM自动填充
     document.getElementById("title").value = autoFillForm.title;
+    var level_select = document.getElementById("level");
+    level_select.value = autoFillForm.level;
   });
   console.log("------------end paste-------------------");
 }
